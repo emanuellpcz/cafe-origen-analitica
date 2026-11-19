@@ -37,3 +37,99 @@ Se identificó que algunos códigos de clientes aparecen en varios registros. Po
 Esto no representa necesariamente un error, ya que un mismo cliente puede realizar varias compras.
 
 Decisión: Conservar los registros y utilizar el código del cliente para relacionar sus diferentes compras. Se verificará que los identificadores correspondan correctamente a cada cliente.
+
+
+## Plan de indicadores en pseudocódigo
+
+### 1. Ventas totales
+
+**Objetivo:** Calcular el dinero total generado por las ventas.
+
+**Plan:**
+
+```text
+INICIAR totalVentas en 0
+
+PARA cada venta del arreglo ventas:
+    calcular valorVenta = cantidad * precio
+    sumar valorVenta a totalVentas
+
+MOSTRAR totalVentas
+```
+
+**Patrones utilizados:** Acumulador.
+
+**Valor inicial:** 0.
+
+### 2. Unidades vendidas
+
+**Objetivo:** Calcular la cantidad total de productos vendidos.
+
+**Plan:**
+
+```text
+INICIAR totalUnidades en 0
+
+PARA cada venta del arreglo ventas:
+    sumar cantidad de la venta a totalUnidades
+
+MOSTRAR totalUnidades
+```
+
+**Patrones utilizados:** Acumulador.
+
+**Valor inicial:** 0.
+
+### 3. Venta más grande
+
+**Objetivo:** Identificar la venta con el mayor valor económico.
+
+**Plan:**
+
+```text
+SI el arreglo ventas tiene registros:
+
+    INICIAR ventaMayor con el valor de la primera venta
+
+    PARA cada venta del arreglo ventas:
+        calcular valorVenta = cantidad * precio
+
+        SI valorVenta es mayor que ventaMayor:
+            actualizar ventaMayor con valorVenta
+
+    MOSTRAR ventaMayor
+
+SI NO:
+    MOSTRAR que no existen ventas para analizar
+```
+
+**Patrones utilizados:** Máximo y comparación condicional.
+
+**Valor inicial:** Valor económico de la primera venta, siempre que existan registros.
+
+### 4. Ticket promedio
+
+**Objetivo:** Calcular cuánto dinero se gasta en promedio por cada compra.
+
+**Plan:**
+
+```text
+INICIAR totalVentas en 0
+INICIAR cantidadCompras en 0
+
+PARA cada venta del arreglo ventas:
+    calcular valorVenta = cantidad * precio
+    sumar valorVenta a totalVentas
+    aumentar cantidadCompras en 1
+
+SI cantidadCompras es mayor que 0:
+    calcular ticketPromedio = totalVentas / cantidadCompras
+    MOSTRAR ticketPromedio
+
+SI NO:
+    MOSTRAR que no existen compras para calcular el promedio
+```
+
+**Patrones utilizados:** Acumulador y contador.
+
+**Valores iniciales:** totalVentas = 0 y cantidadCompras = 0.
