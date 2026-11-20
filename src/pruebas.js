@@ -6,7 +6,16 @@ const {
     valorVenta,
     totalVendido,
     unidadesVendidas,
-    ventaMayor
+    ventaMayor,
+    ticketPromedio
 } = require("./analitica");
 
-console.log(valorVenta(ventas))
+console.log(valorVenta(ventas[0]))
+
+console.log(totalVendido(ventas))
+
+console.log(unidadesVendidas(ventas))
+
+console.log(ventaMayor(ventas))
+
+console.log(ticketPromedio(ventas))

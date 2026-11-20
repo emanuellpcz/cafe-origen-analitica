@@ -8,50 +8,81 @@ function valorVenta(venta){
 
 function totalVendido(ventas){
 
+    let total = 0
+
     for(let venta of ventas){
 
         let totalVenta = valorVenta(venta)
-
-        let total = 0
+        
         total += totalVenta
 
-        return total
-
     }
+
+    return total
 
 }
 
 function unidadesVendidas(ventas){
 
+    let total = 0
+
     for(let cant of ventas){
 
-        let total = 0
         total += cant.cantidad
-        return total
 
     }
+
+    return total
 
 }
 
 function ventaMayor(ventas){
 
+    let mayor = 0
+    let venta = null
+
     for(let contador of ventas){
 
         let price = valorVenta(contador)
 
-        let mayor = 0
-
         if (mayor < price) {
 
-            mayor = ventas.contador
+            mayor = price
+            venta = contador
 
         }
 
     }
 
-    return mayor
+    return venta
 
 }
+
+function ticketPromedio(ventas){
+
+    let total = totalVendido(ventas)
+    let numVentas = 0
+    for(let venta of ventas){
+
+        if(venta.cantidad > 0){
+
+            numVentas++
+
+        }
+
+    }
+
+    let promedio = total / numVentas
+
+    return promedio
+
+}
+
+    function ventasPorCiudad(ventas, ciudad){
+
+        
+
+    }
 
 
 
@@ -60,5 +91,6 @@ module.exports = {
     valorVenta,
     totalVendido,
     unidadesVendidas,
-    ventaMayor
+    ventaMayor,
+    ticketPromedio
 };
