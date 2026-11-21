@@ -72,7 +72,18 @@ function ticketPromedio(ventas){
 
     }
 
-    let promedio = total / numVentas
+    let promedio = 0
+
+    if(numVentas > 0){
+
+    promedio = total / numVentas
+
+    }
+    else{
+
+    promedio = null
+
+    }
 
     return promedio
 
@@ -80,7 +91,23 @@ function ticketPromedio(ventas){
 
     function ventasPorCiudad(ventas, ciudad){
 
-        
+        let city = null
+        let suma = 0
+        let lectura = ciudad.trim().toLowerCase()
+
+        for(let venta of ventas){
+
+            city = venta.ciudad.trim().toLowerCase()
+
+            if(city === lectura){
+
+                suma += valorVenta(venta)
+
+            }
+
+        }
+
+        return suma
 
     }
 
@@ -92,5 +119,6 @@ module.exports = {
     totalVendido,
     unidadesVendidas,
     ventaMayor,
-    ticketPromedio
+    ticketPromedio,
+    ventasPorCiudad
 };
