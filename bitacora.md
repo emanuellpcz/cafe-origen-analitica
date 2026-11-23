@@ -292,3 +292,80 @@ Durante esta sesión aprendí a utilizar métodos de arreglo como `map()`, `filt
 También aprendí a agrupar información utilizando objetos, ordenar resultados sin modificar el arreglo original y seleccionar los elementos más importantes mediante `slice()`.
 
 Finalmente, comparé las funciones implementadas con ciclos y con métodos de arreglo para comprobar que producen los mismos resultados.
+
+
+
+
+# Depuración de errores reportados por la gerente
+
+Durante el desarrollo del motor de análisis se revisaron dos errores identificados en una versión preliminar del proyecto. Se realizaron pruebas para reproducir ambos escenarios y comprobar el comportamiento de la versión actual.
+
+## 1. Error: Bogotá aparece duplicada en el reporte
+
+**Síntoma:**
+
+En la versión preliminar del reporte, Bogotá aparecía dos veces en la sección de ventas por ciudad, debido a diferencias en la escritura del nombre de la ciudad.
+
+**Entrada que lo produce:**
+
+Registros que contienen el mismo nombre de ciudad con diferentes combinaciones de mayúsculas, minúsculas o espacios.
+
+Ejemplo:
+- `"Bogotá"`
+- `"BOGOTÁ"`
+
+**Hipótesis:**
+
+El problema se produce porque JavaScript diferencia las cadenas de texto cuando tienen distintas mayúsculas o minúsculas. Por lo tanto, al agrupar directamente utilizando el nombre original, se pueden generar categorías duplicadas.
+
+**Prueba realizada:**
+
+Se creó un arreglo de prueba con dos registros correspondientes a Bogotá, pero con diferentes escrituras del nombre. Después se ejecutó la función `totalPorCiudad()` para comprobar si ambos registros se agrupaban correctamente.
+
+**Resultado obtenido:**
+
+La función devolvió una sola categoría para Bogotá, acumulando el valor económico de ambos registros.
+
+**Causa:**
+
+La causa del error en la versión preliminar era la falta de normalización de los nombres de las ciudades antes de agruparlos.
+
+**Corrección:**
+
+Se implementó la normalización mediante los métodos `.trim()` y `.toLowerCase()` dentro de `totalPorCiudad()`. Esto permite eliminar espacios innecesarios y unificar las diferencias entre mayúsculas y minúsculas antes de realizar la agrupación.
+
+## 2. Error: el ticket promedio devuelve NaN cuando no hay ventas
+
+**Síntoma:**
+
+Al consultar una fecha sin registros de ventas, el ticket promedio devolvía `NaN` en lugar de indicar que no existían datos suficientes para realizar el cálculo.
+
+**Entrada que lo produce:**
+
+Un arreglo vacío de ventas, como el resultado de consultar una fecha sin registros mediante `ventasDelDia()`.
+
+**Hipótesis:**
+
+El problema se produce porque la función intenta dividir el valor total vendido entre la cantidad de ventas válidas, pero cuando no existen ventas, el contador permanece en cero.
+
+**Prueba realizada:**
+
+Se consultó una fecha sin ventas utilizando `ventasDelDia()` y posteriormente se pasó el arreglo resultante a `ticketPromedio()`.
+
+**Resultado obtenido:**
+
+La función devolvió `null`, indicando que no es posible calcular un promedio porque no existen ventas válidas.
+
+**Causa:**
+
+La causa del error en la versión preliminar era la ausencia de una validación para comprobar si existían ventas antes de realizar la división.
+
+**Corrección:**
+
+Se agregó una condición en `ticketPromedio()` para comprobar si el contador de ventas válidas es igual a cero. Cuando esto ocurre, la función devuelve `null` en lugar de intentar realizar una división entre cero.
+
+## Conclusión
+
+Se verificaron los dos errores reportados por la gerente mediante pruebas controladas. Ninguno se reproduce en la versión actual del proyecto gracias a la normalización de ciudades en `totalPorCiudad()` y a la validación de ventas disponibles en `ticketPromedio()`.
+
+Estas pruebas permiten confirmar que las funciones manejan correctamente los casos evaluados y que el reporte puede trabajar con datos que presentan diferencias de escritura o consultas sin registros de ventas.

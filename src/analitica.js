@@ -253,6 +253,20 @@ function ticketPromedio(ventas){
 
     console.table(topProductosPorValor(ventas, 3))
 
+    function ventasDelDia(ventas, fecha){
+
+        const result = ventas.filter(venta =>{
+
+            return venta.fecha === fecha;
+
+        })
+
+        return result
+
+    }
+
+    console.table(ventasDelDia(ventas, "2026-09-07"))
+
 
 
 
@@ -265,5 +279,9 @@ module.exports = {
     ventasPorCiudad,
     totalVendidoM,
     unidadesVendidasM,
-    ventasPorCiudadM
+    ventasPorCiudadM,
+    totalPorCiudad,
+    unidadesPorProducto,
+    topProductosPorValor,
+    ventasDelDia
 };

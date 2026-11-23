@@ -11,7 +11,10 @@ const {
     ventasPorCiudad,
     totalVendidoM,
     unidadesVendidasM,
-    ventasPorCiudadM
+    ventasPorCiudadM,
+    totalPorCiudad,
+    unidadesPorProducto,
+    topProductosPorValor
 } = require("./analitica");
 
 
