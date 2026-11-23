@@ -369,3 +369,6 @@ Se agregó una condición en `ticketPromedio()` para comprobar si el contador de
 Se verificaron los dos errores reportados por la gerente mediante pruebas controladas. Ninguno se reproduce en la versión actual del proyecto gracias a la normalización de ciudades en `totalPorCiudad()` y a la validación de ventas disponibles en `ticketPromedio()`.
 
 Estas pruebas permiten confirmar que las funciones manejan correctamente los casos evaluados y que el reporte puede trabajar con datos que presentan diferencias de escritura o consultas sin registros de ventas.
+
+
+asdd
