@@ -1,3 +1,5 @@
+const ventas = require("./datos")
+
 function valorVenta(venta){
 
     let total = 0 
@@ -111,6 +113,146 @@ function ticketPromedio(ventas){
 
     }
 
+    function totalVendidoM(ventas) {
+
+    const valor = ventas.map(venta => {
+
+        return valorVenta(venta);
+
+    });
+
+    const total = valor.reduce((acumulador, num) => {
+
+        return acumulador + num;
+
+    }, 0);
+
+    return total;
+    }
+
+    console.log(totalVendidoM(ventas))
+
+    function unidadesVendidasM(ventas) {
+
+    const uni = ventas.map(unidad => {
+
+        return unidad.cantidad;
+
+    });
+
+    const total = uni.reduce((acumulador, num) => {
+
+        return acumulador + num;
+
+    }, 0);
+
+    return total;
+    }
+
+    console.log(unidadesVendidasM(ventas))
+
+    function ventasPorCiudadM(ventas, ciudad){
+
+        const normal = ciudad.trim().toLowerCase()
+
+        const filtro = ventas.filter(venta =>{
+
+            return venta.ciudad.trim().toLowerCase() === normal
+
+        })
+
+        const total = filtro.reduce((cont, num)=>{
+
+                return cont + valorVenta(num);
+
+            }, 0);
+
+            return total
+
+        }
+
+        
+
+    console.log(ventasPorCiudadM(ventas, "caLi"))
+
+    function totalPorCiudad(ventas){
+
+        const result = ventas.reduce((acum, obj)=>{
+
+            let ciudadNormalizada = obj.ciudad.trim().toLowerCase()
+
+            if(acum[ciudadNormalizada] === undefined){
+
+                acum[ciudadNormalizada] = 0
+
+            }
+
+            acum[ciudadNormalizada] += valorVenta(obj)
+
+            return acum
+
+        },{});
+
+        return result
+
+    }
+
+    console.log(totalPorCiudad(ventas))
+
+    function unidadesPorProducto(ventas){
+
+        const result = ventas.reduce((acum, obj)=>{
+
+            let producto = obj.producto
+
+            if(acum[producto] === undefined){
+
+                acum[producto] = 0
+
+            }
+
+            acum[producto] += obj.cantidad
+
+            return acum
+
+        },{});
+
+        return result
+
+    }
+
+    console.log(unidadesPorProducto(ventas))
+
+    function topProductosPorValor(ventas, k){
+
+        const prods = ventas.reduce((acum, obj)=>{
+
+            let producto = obj.producto;
+
+            if(acum[producto] === undefined){
+
+                acum[producto] = 0
+
+            }
+
+            acum[producto] += valorVenta(obj)
+
+            return acum
+
+        },{})
+
+        const array = Object.entries(prods)
+
+        const copia = [...array]
+
+        copia.sort((a, b) => b[1] - a[1]);
+
+        return copia.slice(0, k)
+
+    }
+
+    console.table(topProductosPorValor(ventas, 3))
+
 
 
 
@@ -120,5 +262,8 @@ module.exports = {
     unidadesVendidas,
     ventaMayor,
     ticketPromedio,
-    ventasPorCiudad
+    ventasPorCiudad,
+    totalVendidoM,
+    unidadesVendidasM,
+    ventasPorCiudadM
 };

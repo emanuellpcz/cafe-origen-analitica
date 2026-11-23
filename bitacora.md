@@ -253,3 +253,42 @@ Se realizó el seguimiento del acumulador de unidades, sumando la cantidad de pr
 ### Conclusión
 
 Los resultados obtenidos manualmente mediante las tablas de traza coinciden con los resultados devueltos por el programa. Esto permite comprobar que ambas funciones realizan correctamente sus operaciones con el conjunto de datos utilizado.
+
+## Análisis de funciones: recorrido, transformación y acumulación
+
+A continuación se explica cómo responde cada función a las preguntas de análisis de la sesión.
+
+### 1. Funciones con ciclos
+
+| Función | ¿Qué recorro? | ¿Qué filtro? | ¿Qué transformo? | ¿Qué acumulo? | ¿Cómo agrupo? |
+|---|---|---|---|---|---|
+| `valorVenta()` | No recorre arreglos; recibe una venta. | Nada. | Cantidad y precio en un valor económico. | Nada. | No agrupa. |
+| `totalVendido()` | Todas las ventas. | Nada. | Cada venta en su valor económico mediante `valorVenta()`. | El dinero total vendido. | No agrupa. |
+| `unidadesVendidas()` | Todas las ventas. | Nada. | No transforma los registros. | Las unidades vendidas. | No agrupa. |
+| `ventaMayor()` | Todas las ventas. | Compara los valores para encontrar el mayor. | Cada venta en su valor económico para compararla. | El mayor valor y su objeto correspondiente. | No agrupa. |
+| `ticketPromedio()` | Todas las ventas. | Solo considera ventas con cantidad mayor que cero. | Cada venta en su valor económico. | El dinero vendido y la cantidad de ventas válidas. | No agrupa. |
+| `ventasPorCiudad()` | Todas las ventas. | Selecciona las ventas de la ciudad indicada. | Normaliza el nombre de la ciudad y calcula el valor de cada venta. | El dinero generado por esa ciudad. | Agrupa lógicamente mediante la comparación de ciudades. |
+
+### 2. Funciones con métodos de arreglo
+
+| Función | ¿Qué recorro? | ¿Qué filtro? | ¿Qué transformo? | ¿Qué acumulo? | ¿Cómo agrupo? |
+|---|---|---|---|---|---|
+| `totalVendidoM()` | Todas las ventas mediante `map()`. | Nada. | Cada venta en su valor económico. | El dinero total mediante `reduce()`. | No agrupa. |
+| `unidadesVendidasM()` | Todas las ventas. | Nada. | No transforma los registros. | Las unidades mediante `reduce()`. | No agrupa. |
+| `ventasPorCiudadM()` | Las ventas mediante `filter()`. | Las ventas que coinciden con la ciudad indicada. | Normaliza las ciudades y calcula sus valores económicos. | El dinero de las ventas filtradas mediante `reduce()`. | Agrupa mediante el filtro por ciudad. |
+
+### 3. Funciones de agrupación y ranking
+
+| Función | ¿Qué recorro? | ¿Qué filtro? | ¿Qué transformo? | ¿Qué acumulo? | ¿Cómo agrupo? |
+|---|---|---|---|---|---|
+| `totalPorCiudad()` | Todas las ventas mediante `reduce()`. | Nada. | Normaliza los nombres de las ciudades. | El dinero generado por cada ciudad. | Utiliza un objeto cuyas propiedades representan las ciudades. |
+| `unidadesPorProducto()` | Todas las ventas mediante `reduce()`. | Nada. | Obtiene el nombre del producto y sus unidades. | Las unidades vendidas por producto. | Utiliza un objeto cuyas propiedades representan los productos. |
+| `topProductosPorValor()` | Todas las ventas mediante `reduce()`. | Selecciona los primeros `k` productos al final. | Convierte el objeto agrupado en un array mediante `Object.entries()`. | El dinero generado por cada producto. | Agrupa por producto, ordena mediante `sort()` y selecciona con `slice()`. |
+
+### Conclusión
+
+Durante esta sesión aprendí a utilizar métodos de arreglo como `map()`, `filter()` y `reduce()` para reemplazar recorridos manuales.
+
+También aprendí a agrupar información utilizando objetos, ordenar resultados sin modificar el arreglo original y seleccionar los elementos más importantes mediante `slice()`.
+
+Finalmente, comparé las funciones implementadas con ciclos y con métodos de arreglo para comprobar que producen los mismos resultados.

@@ -8,7 +8,10 @@ const {
     unidadesVendidas,
     ventaMayor,
     ticketPromedio,
-    ventasPorCiudad
+    ventasPorCiudad,
+    totalVendidoM,
+    unidadesVendidasM,
+    ventasPorCiudadM
 } = require("./analitica");
 
 
