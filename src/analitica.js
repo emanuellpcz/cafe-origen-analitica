@@ -267,6 +267,88 @@ function ticketPromedio(ventas){
 
     console.table(ventasDelDia(ventas, "2026-09-07"))
 
+    const contador = {
+
+        elementosVisitados: 0,
+        comparaciones: 0
+
+    }
+
+    function totalVendidoInstrumentado(ventas, contador){
+
+    let total = 0
+
+    for(let venta of ventas){
+
+        let totalVenta = valorVenta(venta)
+        
+        total += totalVenta
+
+        contador.elementosVisitados++
+
+    }
+
+    return total
+
+}
+
+console.log(totalVendidoInstrumentado(ventas, contador))
+console.log(contador)
+
+function ventaMayorInstrumentado(ventas, contador){
+
+    let mayor = 0
+    let result = null
+
+    for(let venta of ventas){
+
+        let price = valorVenta(venta)
+
+        contador.comparaciones++
+        if (mayor < price) {
+
+            mayor = price
+            result = venta
+
+        }
+        contador.elementosVisitados++
+    }
+
+    return result
+
+}
+
+function totalPorCiudadInstrumentado(ventas, contador){
+
+        const result = ventas.reduce((acum, obj)=>{
+
+            let ciudadNormalizada = obj.ciudad.trim().toLowerCase()
+
+            contador.comparaciones++
+            if(acum[ciudadNormalizada] === undefined){
+
+                acum[ciudadNormalizada] = 0
+
+            }
+
+            acum[ciudadNormalizada] += valorVenta(obj)
+
+            contador.elementosVisitados++
+            return acum
+            
+        },{});
+
+        return result
+
+    }
+
+    function primeraVenta(ventas, contador) {
+        
+    contador.elementosVisitados++
+    return ventas[0];
+    
+}
+
 
 
 
@@ -283,5 +365,9 @@ module.exports = {
     totalPorCiudad,
     unidadesPorProducto,
     topProductosPorValor,
-    ventasDelDia
+    ventasDelDia,
+    totalVendidoInstrumentado,
+    ventaMayorInstrumentado,
+    totalPorCiudadInstrumentado,
+    primeraVenta
 };
