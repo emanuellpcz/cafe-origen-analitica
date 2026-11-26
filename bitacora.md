@@ -370,5 +370,29 @@ Se verificaron los dos errores reportados por la gerente mediante pruebas contro
 
 Estas pruebas permiten confirmar que las funciones manejan correctamente los casos evaluados y que el reporte puede trabajar con datos que presentan diferencias de escritura o consultas sin registros de ventas.
 
+Prediccion: Yo creo que si n se multiplica por 10, la complejidad de su codigo deberia de multiplicarse por 10 tambien, ya que tendria que repetir su codigo  muchisimas veces mas
 
-asdd
+| Cantidad de ventas (n) | `totalVendido` | `ventaMayor` | `totalPorCiudad` | `primeraVenta` |
+|---:|---:|---:|---:|---:|
+| 100 | 100 | 100 | 100 | 1 |
+| 1.000 | 1.000 | 1.000 | 1.000 | 1 |
+| 10.000 | 10.000 | 10.000 | 10.000 | 1 |
+| 100.000 | 100.000 | 100.000 | 100.000 | 1 |
+
+| Función | Complejidad | Explicación |
+|---|---|---|
+| `totalVendido` | O(n) | Recorre todas las ventas para sumar sus valores. |
+| `ventaMayor` | O(n) | Recorre todas las ventas y compara sus valores. |
+| `totalPorCiudad` | O(n) | Procesa todas las ventas para agruparlas por ciudad. |
+| `primeraVenta` | O(1) | Accede directamente al primer elemento. |
+
+Las pruebas realizadas demuestran que el crecimiento de las operaciones depende de la complejidad de cada función. Las funciones totalVendido, ventaMayor y totalPorCiudad presentan un comportamiento lineal O(n), porque necesitan recorrer todos los elementos del arreglo. Por otro lado, primeraVenta presenta complejidad constante O(1), ya que accede directamente al primer elemento sin recorrer el arreglo. Esto demuestra que no todas las funciones aumentan su trabajo al mismo ritmo cuando crece la cantidad de datos.
+
+| Función | Complejidad | Justificación |
+|---|---|---|
+| `primeraVenta(ventas)` | **O(1)** | Accede directamente a `ventas[0]`. No necesita recorrer el arreglo. |
+| `totalVendidoInstrumentado(ventas, contador)` | **O(n)** | Recorre todas las ventas una vez para acumular sus valores. |
+| `ventaMayorInstrumentado(ventas, contador)` | **O(n)** | Recorre todas las ventas y compara cada valor con el mayor encontrado. |
+| `totalPorCiudadInstrumentado(ventas, contador)` | **O(n)** | Usa `reduce()` para visitar cada venta una vez y acumularla por ciudad. |
+
+
