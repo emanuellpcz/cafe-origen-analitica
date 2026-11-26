@@ -10,7 +10,9 @@ const {
     ventaMayorInstrumentado,
     totalVendidoInstrumentado,
     primeraVenta,
-    clientesRecurrentes
+    clientesRecurrentes,
+    totalCiudadCadena,
+    totalCiudadUnaPasada
 } = require("./analitica");
 
 const tamanos = [100, 1000, 10000, 100000]
@@ -85,4 +87,13 @@ for (const n of muestrasRecurrentes) {
   clientesRecurrentes(lote);
   console.timeEnd(`clientesRecurrentes n=${n}`);
 }
+
+const lote = generarVentas(10000);
+
+const cadena = totalCiudadCadena(lote, "Medellín");
+const unaPasada = totalCiudadUnaPasada(lote, "Medellín");
+
+console.log("Total con cadena:", cadena);
+console.log("Total con una pasada:", unaPasada);
+console.log("¿Coinciden?", cadena === unaPasada);
 

@@ -421,3 +421,83 @@ Esta búsqueda representa trabajo adicional. En el peor caso, puede revisar una 
 
 
 El reporte se vuelve lento porque, a medida que aumenta la cantidad de ventas, el sistema debe revisar muchas más combinaciones para encontrar los clientes recurrentes. Además, cada vez que encuentra un posible cliente repetido, debe buscar si ya lo había agregado a la lista. Por eso, cuando hay muchas ventas, el reporte necesita más tiempo para terminar.
+
+Análisis de complejidad temporal y espacial
+
+    Comparación de las funciones para calcular el total por ciudad
+
+Para comprobar que las dos versiones calculan el mismo resultado, generé un arreglo de 10.000 ventas y ejecuté ambas funciones con la ciudad Medellín.
+
+    Total con la cadena de métodos: 476217000
+    Total con una pasada: 476217000
+    ¿Coinciden?: Si
+
+
+Los dos resultados deben ser iguales, porque ambas funciones calculan el valor de las ventas correspondientes a la ciudad indicada.
+
+    Recorridos y arreglos nuevos
+
+La función totalCiudadCadena utiliza los métodos map, filter, map y reduce.
+
+    Realiza cuatro recorridos principales del arreglo.
+    Crea tres arreglos intermedios: uno por cada map y otro por filter.
+    Su complejidad temporal es O(n), porque recorre los datos una cantidad fija de veces.
+    Su complejidad espacial es O(n), porque los arreglos nuevos pueden crecer según la cantidad de ventas.
+
+
+La función totalCiudadUnaPasada utiliza un solo ciclo.
+
+    Realiza un recorrido del arreglo.
+    No crea arreglos intermedios.
+    Su complejidad temporal es O(n), porque revisa cada venta una vez.
+    Su complejidad espacial adicional es O(1), porque utiliza variables que no crecen con la cantidad de ventas.
+
+
+    ¿Por qué ambas funciones son O(n) en tiempo?
+
+Aunque totalCiudadCadena recorre los datos cuatro veces, cada recorrido depende de la cantidad de ventas. Si hay n ventas, realiza aproximadamente cuatro veces esa cantidad de trabajo.
+
+En Big O se eliminan las constantes, por lo que O(4n) se simplifica a O(n). La versión de una pasada
+
+    ¿Por qué ambas funciones son O(n) en tiempo?
+
+
+Aunque totalCiudadCadena recorre los datos cuatro veces, cada recorrido depende de la cantidad de ventas. Si hay n ventas, realiza aproximadamente cuatro veces esa cantidad de trabajo.
+
+En Big O se eliminan las constantes, por lo que O(4n) se simplifica a O(n). La versión de una pasada también es O(n), porque revisa las ventas una sola vez.
+
+Esto no significa que ambas tarden exactamente lo mismo. La versión encadenada hace más recorridos y crea arreglos adicionales, mientras que la versión de una pasada realiza menos trabajo y utiliza menos memoria temporal.
+
+    Complejidad espacial de las funciones del motor
+
+
+La complejidad espacial indica cuánta memoria adicional necesita una función a medida que aumenta la cantidad de datos.
+
+O(1) significa que la memoria adicional se mantiene constante.
+
+O(n) significa que la memoria adicional puede crecer proporcionalmente a la cantidad de datos.
+
+Según su implementación:
+
+Las funciones que recorren las ventas y solo utilizan variables acumuladoras, como un total o un contador, utilizan O(1) de espacio adicional.
+
+Las funciones que crean arreglos u objetos para guardar resultados utilizan O(n) cuando esas estructuras pueden crecer con los datos.
+
+totalPorCiudad utiliza O(1) si solo calcula el total de una ciudad con un acumulador. Si construye una estructura con los totales de varias ciudades, puede utilizar O(n).
+
+topProductosPorValor puede utilizar O(n) de espacio si crea una estructura para acumular los valores de los productos y luego la ordena o selecciona elementos.
+
+Para clasificar las demás funciones del motor, revisé si crean estructuras nuevas o si únicamente trabajan con variables. La clasificación debe corresponder a la implementación de cada función.
+
+    Decisión sobre la versión que dejaré en el motor
+
+
+Dejaré totalCiudadUnaPasada en el motor. Aunque la versión encadenada es fácil de leer, crea arreglos intermedios y realiza varios recorridos.
+
+La versión de una pasada entrega el mismo resultado, recorre las ventas una sola vez y utiliza menos memoria adicional. Como la plataforma trabajará con muchas ventas y tendrá memoria limitada, considero que esta versión es más conveniente para el proyecto.
+
+Conclusión
+
+La cantidad de datos influye tanto en el tiempo como en la memoria que necesita el reporte. La versión encadenada permite expresar las operaciones de forma clara, pero crea arreglos intermedios. La versión de una pasada obtiene el mismo resultado con menos recorridos y sin esos arreglos adicionales.
+
+Por esta razón, elegiré la versión de una pasada para el motor, buscando que el reporte utilice mejor los recursos cuando aumente la cantidad de ventas.
