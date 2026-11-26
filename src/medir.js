@@ -9,7 +9,8 @@ const {
     totalPorCiudadInstrumentado,
     ventaMayorInstrumentado,
     totalVendidoInstrumentado,
-    primeraVenta
+    primeraVenta,
+    clientesRecurrentes
 } = require("./analitica");
 
 const tamanos = [100, 1000, 10000, 100000]
@@ -73,5 +74,15 @@ resultados.push({
 
 console.table(resultados)
 
+}
+
+const muestrasRecurrentes = [1000, 2000, 4000, 8000, 16000, 100000];
+
+for (const n of muestrasRecurrentes) {
+  const lote = generarVentas(n);
+
+  console.time(`clientesRecurrentes n=${n}`);
+  clientesRecurrentes(lote);
+  console.timeEnd(`clientesRecurrentes n=${n}`);
 }
 

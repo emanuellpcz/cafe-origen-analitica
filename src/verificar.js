@@ -13,7 +13,8 @@ const {
     totalPorCiudad,
     unidadesPorProducto,
     topProductosPorValor,
-    ventasDelDia
+    ventasDelDia,
+    clientesRecurrentes
 } = require("./analitica");
 
 const resultadoCiclo1 = totalVendido(ventas);
@@ -49,3 +50,5 @@ const ventasDiaSinVentas = ventasDelDia(ventas, "2026-09-07");
 
 console.log("PRUEBA DE TICKET PROMEDIO");
 console.log(ticketPromedio(ventasDiaSinVentas));
+
+console.log("Clientes recurrentes:", clientesRecurrentes(ventas));

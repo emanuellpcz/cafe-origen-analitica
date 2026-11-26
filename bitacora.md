@@ -395,4 +395,29 @@ Las pruebas realizadas demuestran que el crecimiento de las operaciones depende 
 | `ventaMayorInstrumentado(ventas, contador)` | **O(n)** | Recorre todas las ventas y compara cada valor con el mayor encontrado. |
 | `totalPorCiudadInstrumentado(ventas, contador)` | **O(n)** | Usa `reduce()` para visitar cada venta una vez y acumularla por ciudad. |
 
+    Análisis de los tiempos
 
+Al revisar la tabla, se observa que cuando aumenta la cantidad de ventas, también aumenta el tiempo que tarda la función. Cuando se duplica la cantidad de ventas, el tiempo tiende a crecer aproximadamente cuatro veces, aunque puede variar según el equipo y los datos utilizados.
+
+Esto ocurre porque la función compara las ventas entre sí. Al tener más ventas, la cantidad de comparaciones aumenta mucho más rápido. Este comportamiento se relaciona con la complejidad O(n²).
+
+    Estimación para cantidades mayores
+
+Tomando como referencia el tiempo medido con 16.000 ventas, hice una estimación para cantidades mayores. La estimación supone que el tiempo crece aproximadamente siguiendo el mismo comportamiento observado.
+
+    100.000 ventas: aproximadamente 10 segundos.
+    1.000.000 de ventas: aproximadamente 1 minuto.
+
+
+La estimación para 100.000 ventas es menor a dos minutos, por lo tanto se ejecuto la prueba. La estimación es aproximada y el tiempo real puede variar.
+
+    Costo adicional de recurrentes.includes()
+
+La función utiliza recurrentes.includes() para revisar si un cliente ya fue agregado a la lista de clientes recurrentes. Para hacerlo, busca dentro del arreglo y puede tener que revisar muchos elementos antes de encontrarlo o confirmar que no está.
+
+Esta búsqueda representa trabajo adicional. En el peor caso, puede revisar una gran parte del arreglo cada vez que se necesita comprobar un cliente. Como ocurre dentro de los ciclos que comparan las ventas, puede hacer que la función tarde todavía más y que su crecimiento llegue a ser de tipo O(n³).
+
+    Conclusión para la gerente
+
+
+El reporte se vuelve lento porque, a medida que aumenta la cantidad de ventas, el sistema debe revisar muchas más combinaciones para encontrar los clientes recurrentes. Además, cada vez que encuentra un posible cliente repetido, debe buscar si ya lo había agregado a la lista. Por eso, cuando hay muchas ventas, el reporte necesita más tiempo para terminar.
