@@ -78,7 +78,7 @@ console.table(resultados)
 
 }
 
-const muestrasRecurrentes = [1000, 2000, 4000, 8000, 16000, 100000];
+const muestrasRecurrentes = [1000, 2000, 4000, 8000, 10000];
 
 for (const n of muestrasRecurrentes) {
   const lote = generarVentas(n);
@@ -96,4 +96,10 @@ const unaPasada = totalCiudadUnaPasada(lote, "Medellín");
 console.log("Total con cadena:", cadena);
 console.log("Total con una pasada:", unaPasada);
 console.log("¿Coinciden?", cadena === unaPasada);
+
+console.time(cadena)
+console.timeEnd(cadena)
+
+console.time(unaPasada)
+console.timeEnd(unaPasada)
 
